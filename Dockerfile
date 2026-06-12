@@ -10,4 +10,7 @@ RUN pip install --no-cache-dir pipenv \
 COPY . .
 USER appuser
 
+HEALTHCHECK --interval=1m --timeout=10s --start-period=30s --retries=3 \
+  CMD pgrep -f run_lambda_launcher/sum.py > /dev/null || exit 1
+
 CMD ["python", "run_lambda_launcher/sum.py"]
