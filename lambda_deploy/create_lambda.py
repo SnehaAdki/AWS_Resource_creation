@@ -9,12 +9,6 @@ LAMBDA_CONFIG = {
     }
 }
 
-session = boto3.Session(**get_aws_credentials())
-breakpoint()
-
-
-lambda_client = session.client('lambda')
-
 def get_lambda_function(lambda_client, function_name):
     try:
         func_data = lambda_client.get_function(FunctionName=function_name)
@@ -28,7 +22,7 @@ def get_lambda_function(lambda_client, function_name):
         raise
 
 
-def deploy_lambda(lambda_name):
+def deploy_lambda(lambda_client, lambda_name):
     func_data = LAMBDA_CONFIG[lambda_name]
     function_exist = get_lambda_function(lambda_client, func_data['function_name'])
     if not function_exist:
@@ -59,6 +53,8 @@ def deploy_lambda(lambda_name):
 
 
 if __name__ == '__main__':
+    session = boto3.Session(**get_aws_credentials())
+    lambda_client = session.client('lambda')
     lambda_name = 'sum_lambda'
     print("Deploying Lambda: ", lambda_name)
-    deploy_lambda(lambda_name)
+    deploy_lambda(lambda_client, lambda_name)

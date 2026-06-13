@@ -28,11 +28,12 @@ jobs:
           pipenv install --deploy --ignore-pipfile --system
 
       - name: Create Lambda ZIP package
-        run: python lambda_deploy/lambda_zip.py
+        run: python -m lambda_deploy.lambda_zip
 
       - name: Deploy Lambda function
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
-        run: python lambda_deploy/create_lambda.py
+          PYTHONPATH: ${{ github.workspace }}
+        run: python -m lambda_deploy.create_lambda
