@@ -48,4 +48,4 @@ def create_table_dynamod(table_details):
 if __name__ == '__main__':
     TABLE_NAME = [USERS, ORDERS, PRODUCTS]
     for each_table in TABLE_NAME:
-        create_table_dynamod(each_table)
+        create_table_dynamod(TABLE_CONFIGURATIONS[each_table])
