@@ -6,6 +6,7 @@ def lambda_handler(event, context):
     
     # Calculate the sum
     result = num1 + num2
+    print("Welcome... via IAC")
     print("number1: ", num1)
     print("number2: ", num2)
     print("result: ", result)
