@@ -33,7 +33,6 @@ def table_exists(table_name):
         error_code = err.response.get("Error", {}).get("Code")
         if error_code == "ResourceNotFoundException":
             return False
-        raise
 
 
 def delete_table(table_name):
